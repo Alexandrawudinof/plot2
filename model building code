@@ -1,0 +1,34 @@
+##### reorder the chart for the whole 2015
+wholedata<-rbind(bike01, bike02, bike03, bike04, bike05, bike06, bike07, bike08, bike09, bike10, bike11, bike12)
+attach(wholedata)
+a<-unique(start.station.id)
+b<-c()
+for(i in 1:length(a)){
+  b[i]=nrow(wholedata[wholedata[,4]==a[i], ])
+}
+oo<-order(wholedata[,4])
+newbike<-wholedata[oo, ]
+aa<-a[order(a)]
+bb<-b[order(a)]
+newcol<-rep(bb,bb)
+bikef<-cbind(newbike, newcol)
+model_2015<-glm(bikef$newcol ~ bikef$start.station.name + bikef$end.station.name + bikef$birth.year + bikef$gender)
+summary(model_2015)
+
+##### reorder the chart for the whole 2014
+wholedata_14<-rbind(bike01_14, bike02_14, bike03_14, bike04_14, bike05_14, bike06_14, bike07_14, bike08_14, bike09_14, bike10_14, bike11_14, bike12_14)
+attach(wholedata_14)
+a_14<-unique(start.station.id)
+b_14<-c()
+for(i in 1:length(a_14)){
+  b_14[i]=nrow(wholedata_14[wholedata_14[,4]==a_14[i], ])
+}
+oo_14<-order(wholedata_14[,4])
+newbike_14<-wholedata_14[oo_14, ]
+aa_14<-a_14[order(a_14)]
+bb_14<-b_14[order(a_14)]
+newcol_14<-rep(bb_14,bb_14)
+bikef_14<-cbind(newbike_14, newcol_14)
+model_2014<-glm(bikef_14$newcol_14 ~ bikef_14$start.station.name + bikef_14$end.station.name + bikef_14$birth.year + bikef_14$gender)
+summary(model_2014)
+
